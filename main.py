@@ -11,7 +11,7 @@ hashcode = ts+private+public
 hashcode = hashcode.encode('utf-8')
 hashcode = hashlib.md5(hashcode).hexdigest()
 
-charname = input('Enter the Marvel character:\n')
+charname = "Wolverine" #input('Enter the Marvel character:\n')
 
 url = "https://gateway.marvel.com:443/v1/public/characters"
 
@@ -22,6 +22,6 @@ headers = {
     'Marvel-Host': "gateway.marvel.com"
 }
 
-response = requests.get(url, headers=headers, params=querystring)
+response = requests.get(url, headers=headers, params=querystring, verify=False)
 
 print(response.json())
