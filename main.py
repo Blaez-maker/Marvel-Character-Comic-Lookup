@@ -11,9 +11,9 @@ public = "9aac47d81d48c3c0fb4a6a30c1d48b5b"
 hashcode = (ts+private+public).encode('utf-8')
 hashcode = hashlib.md5(hashcode).hexdigest()
 
-choice = input('1:Characters\n2:Comic\n3:Creator\n4:Event\n5:Series\n6:Stories\n')
+#choice = input('1:Characters\n2:Comic\n3:Creator\n4:Event\n5:Series\n6:Stories\n')
 
-match choice:
+"""match choice:
     case '1':
         choice = "characters"
     case '2':
@@ -26,11 +26,11 @@ match choice:
         choice = "series"
     case '6':
         choice = "stories"
+"""
 
+charname = input('Enter the character\n')
 
-charname = input('Enter the '+ choice + '\n')
-
-url = "https://gateway.marvel.com/v1/public/"+choice
+url = "https://gateway.marvel.com/v1/public/characters"
 
 querystring = {"name":charname,"apikey":public,"hash":hashcode,"ts":ts}
 
@@ -41,4 +41,7 @@ headers = {
 
 response = requests.get(url, headers=headers, params=querystring)
 
-print(json.dumps(response.json()))
+data = json.loads(json.dumps(response.json()))
+
+print(data['data']['results'][0]['comics']['items'][0]['name'])
+
