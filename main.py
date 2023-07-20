@@ -43,5 +43,10 @@ response = requests.get(url, headers=headers, params=querystring)
 
 data = json.loads(json.dumps(response.json()))
 
-print(data['data']['results'][0]['comics']['items'][0]['name'])
+jsonResults = data["data"]['results'][0]['comics']
+
+for x in jsonResults['items']:
+     print(x['name'])
+
+#print(data['data']['results'][0]['comics']['items'][1]['name'])
 
