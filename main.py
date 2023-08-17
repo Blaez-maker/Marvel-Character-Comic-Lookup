@@ -12,13 +12,12 @@ public = "9aac47d81d48c3c0fb4a6a30c1d48b5b"
 hashcode = (ts+private+public).encode('utf-8')
 hashcode = hashlib.md5(hashcode).hexdigest()
 
-#choice = input('1:Characters\n2:Comic\n3:Creator\n4:Event\n5:Series\n6:Stories\n')
-
 charname = "Rogue" #input('Enter the character\n')
 
 url = "https://gateway.marvel.com/v1/public/characters"
+url = url + "?name=" + charname
 
-querystring = {"name": charname, "apikey": public, "hash": hashcode, "ts": ts}
+querystring = {"limit": 100, "apikey": public, "hash": hashcode, "ts": ts}
 
 headers = {
     'Marvel-Key': "9aac47d81d48c3c0fb4a6a30c1d48b5b",
@@ -29,14 +28,30 @@ response = requests.get(url, headers=headers, params=querystring)
 
 data = json.loads(json.dumps(response.json()))
 
-characterId = data['data']['results'][0]['id'] #id used to get the full list of comics
+characterId = data['data']['results'][0]['id'] #id of character used to get the full list of comics
 
-url = url + characterId
+url = "https://gateway.marvel.com/v1/public/characters/" + str(characterId) + "/comics"
 
-jsonResults = data['data']['results'][0]['comics']
+response = requests.get(url, headers=headers, params=querystring)
+data = json.loads(json.dumps(response.json()))
 
-for x in jsonResults['items']:
-     print(x['name'])
+print(url)
+
+jsonResults = data['data']['results']
+
+print(jsonResults)
+#for x in jsonResults['collectedIssues']:
+    # print(x['name'])
+
+
+
+
+
+
+
+
+
+
 """
 jsonResults = data['data']['results'][0]['events']
 
