@@ -33,15 +33,18 @@ characterId = data['data']['results'][0]['id'] #id of character used to get the 
 url = "https://gateway.marvel.com/v1/public/characters/" + str(characterId) + "/comics"
 
 response = requests.get(url, headers=headers, params=querystring)
-data = json.loads(json.dumps(response.json()))
+data = response.json()#json.loads(json.dumps(response.json()))
 
 #print(url)
 
 jsonResults = data['data']['results']
 
+total_record = data['data']['total'] #total of all comics returned
+#for offset in range(0, total_record,100):
+
 #print(jsonResults)
-for x in jsonResults:
-     print(x['title'])
+#for x in jsonResults:
+    # print(x['title'])
 
 
 
