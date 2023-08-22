@@ -35,18 +35,13 @@ url = "https://gateway.marvel.com/v1/public/characters/" + str(characterId) + "/
 response = requests.get(url, headers=headers, params=querystring)
 data = json.loads(json.dumps(response.json()))
 
-print(url)
+#print(url)
 
 jsonResults = data['data']['results']
 
-print(jsonResults)
-#for x in jsonResults['collectedIssues']:
-    # print(x['name'])
-
-
-
-
-
+#print(jsonResults)
+for x in jsonResults:
+     print(x['title'])
 
 
 
