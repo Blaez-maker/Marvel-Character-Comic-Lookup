@@ -12,7 +12,7 @@ public = "9aac47d81d48c3c0fb4a6a30c1d48b5b"
 hashcode = (ts+private+public).encode('utf-8')
 hashcode = hashlib.md5(hashcode).hexdigest()
 
-charname = "Rogue" #input('Enter the character\n')
+charname = "Gambit" #input('Enter the character\n')
 
 url = "https://gateway.marvel.com/v1/public/characters"
 url = url + "?name=" + charname
@@ -40,31 +40,16 @@ data = response.json()#json.loads(json.dumps(response.json()))
 jsonResults = data['data']['results']
 
 total_record = data['data']['total'] #total of all comics returned
-#for offset in range(0, total_record,100):
+for offset in range(0, total_record, 100):
 
-#print(jsonResults)
-#for x in jsonResults:
-    # print(x['title'])
+    url = "https://gateway.marvel.com/v1/public/characters/" + str(characterId) + "/comics?offset=" +str(offset)
+    response = requests.get(url, headers=headers, params=querystring)
+    data = response.json()
+    jsonResults = data['data']['results']
 
+    offset = offset + 100
 
+    for x in jsonResults:
+        print(x['title'])
 
-
-
-"""
-jsonResults = data['data']['results'][0]['events']
-
-for x in jsonResults['items']:
-     print(x['name'])
-
-jsonResults = data['data']['results'][0]['series']
-
-for x in jsonResults['items']:
-     print(x['name'])
-
-jsonResults = data['data']['results'][0]['stories']
-
-for x in jsonResults['items']:
-     print(x['name'])
-"""
-#remember to update offset and limit to return the following data
 #order by year
