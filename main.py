@@ -39,7 +39,10 @@ data = response.json()#json.loads(json.dumps(response.json()))
 
 jsonResults = data['data']['results']
 
+fullComicList = open("organiazedcomiclist.txt", "w")
+
 total_record = data['data']['total'] #total of all comics returned
+
 for offset in range(0, total_record, 100):
 
     url = "https://gateway.marvel.com/v1/public/characters/" + str(characterId) + "/comics?offset=" +str(offset)
@@ -50,6 +53,10 @@ for offset in range(0, total_record, 100):
     offset = offset + 100
 
     for x in jsonResults:
+        fullComicList = open("organiazedcomiclist.txt", "a")
+        fullComicList.write(x['title'])
+        fullComicList.write("\n")
+        fullComicList.close()
         print(x['title'])
 
 #order by year
