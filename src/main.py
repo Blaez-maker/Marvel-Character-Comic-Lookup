@@ -59,5 +59,3 @@ for offset in range(0, total_record, 100):
         fullComicList.write("\n")
         fullComicList.close()
         print(x['title'])
-
-#order by year
