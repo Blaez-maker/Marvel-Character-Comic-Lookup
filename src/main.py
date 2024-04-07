@@ -42,7 +42,7 @@ jsonResults = data['data']['results']
 
 total_record = data['data']['total'] #total of all comics returned
 
-fullComicList = open("organiazedcomiclist.txt", "w") #outputs the list in the text file
+fullComicList = open("comiclist.txt", "w") #outputs the list in the text file
 
 for offset in range(0, total_record, 100):
 
@@ -54,7 +54,7 @@ for offset in range(0, total_record, 100):
     offset = offset + 100
 
     for x in jsonResults:
-        fullComicList = open("organiazedcomiclist.txt", "a")
+        fullComicList = open("comiclist.txt", "a")
         fullComicList.write(x['title'])
         fullComicList.write("\n")
         fullComicList.close()
