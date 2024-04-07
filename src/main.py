@@ -5,7 +5,7 @@ import json
 
 ts = str(time.time())
 limit = 600
-f = open('private_key.txt', 'r')
+f = open('actual_key.txt', 'r')
 
 private = f.read()
 public = "9aac47d81d48c3c0fb4a6a30c1d48b5b"
@@ -13,7 +13,7 @@ public = "9aac47d81d48c3c0fb4a6a30c1d48b5b"
 hashcode = (ts+private+public).encode('utf-8')
 hashcode = hashlib.md5(hashcode).hexdigest()
 
-charname = input('Enter the character\n')
+charname = input('Enter the character name\n')
 
 url = "https://gateway.marvel.com/v1/public/characters"
 url = url + "?name=" + charname
@@ -36,7 +36,11 @@ url = "https://gateway.marvel.com/v1/public/characters/" + str(characterId) + "/
 response = requests.get(url, headers=headers, params=querystring)
 data = response.json()
 
+data = response.json()
+
 jsonResults = data['data']['results']
+
+total_record = data['data']['total'] #total of all comics returned
 
 fullComicList = open("organiazedcomiclist.txt", "w") #outputs the list in the text file
 
